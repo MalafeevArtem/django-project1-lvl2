@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!2)a@6lo$%v)2e5h-!g^14oa+bzz4kt%$9^zo%&#h&%$@t^&ea'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = 'static'
@@ -66,7 +66,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'tours.context_processors.statistic',
-                'tours.context_processors.departures',
             ],
         },
     },

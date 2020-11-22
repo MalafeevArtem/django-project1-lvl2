@@ -12,7 +12,7 @@ from data import departures, tours
 class MainView(View):
     def get(self, request):
         context = {
-            "tours": random.sample(list(tours.items()), 6)
+            "tours": dict(random.sample(list(tours.items()), 6))
         }
 
         return render(request, 'tours/index.html', context=context)
@@ -20,7 +20,8 @@ class MainView(View):
 
 class DepartureView(View):
     def get(self, request, departure):
-        list_tours = list(filter(lambda tour: departure == tour[1]['departure'], tours.items()))
+
+        list_tours = dict(filter(lambda tour: departure == tour[1]['departure'], tours.items()))
 
         context = {
             'tours': list_tours,
@@ -49,31 +50,15 @@ class TourView(View):
 
 
 def show_count_stars(stars):
-    result = ''
-    for star in range(stars):
-        result += '★'
-
-    return result
+    return '★' * int(stars)
 
 
 def get_max_value(parameter, list_tours):
-    max_value = list_tours[0][1][parameter]
-
-    for tour in list_tours:
-        if tour[1][parameter] > max_value:
-            max_value = tour[1][parameter]
-
-    return max_value
+    return max([list_tours[key][parameter] for key in list_tours])
 
 
 def get_min_value(parameter, list_tours):
-    min_value = list_tours[0][1][parameter]
-
-    for tour in list_tours:
-        if tour[1][parameter] < min_value:
-            min_value = tour[1][parameter]
-
-    return min_value
+    return min([list_tours[key][parameter] for key in list_tours])
 
 
 def custom_handler_404(request, exception):

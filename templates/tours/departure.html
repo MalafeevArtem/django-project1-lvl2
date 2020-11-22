@@ -3,25 +3,19 @@
 {% block content %}
 <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим {{ departure }}</h1>
-    <p class="mb-4">Найдено {{ number_tours }}
-        {% if number_tours == 1 %}
-            тур
-        {% elif 2 <= number_tours <= 4 %}
-            тура
-        {% else %}
-            туров
-        {% endif %}, от {{ min_price }} до {{ max_price }} P и от {{ min_nights }} ночей до {{ max_nights }} ночей</p>
+    <p class="mb-4">Найдено {{ number_tours }} тур, от {{ min_price }} до {{ max_price }} P и от {{ min_nights }}
+        ночей до {{ max_nights }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
-        {% for tour in tours %}
+        {% for id, tour in tours.items %}
         <div class="col-4">
             <div class="card mb-4">
-                <img src="{{ tour.1.picture }}" class="card-img-top img-fluid" alt="">
+                <img src="{{ tour.picture }}" class="card-img-top img-fluid" alt="">
                 <div class="card-body">
-                    <h2 class="h5 card-title">{{ tour.1.title }}</h2>
-                    <p class="card-text">{{ tour.1.description }}</p>
-                    <p class="card-text"><b>{{ tour.1.date }}, {{ tour.1.nights }} ночей, {{ tour.1.price }} P</b></p>
-                    <a href="/tour/{{ tour.0 }}" class="btn btn-sm btn-primary">Подробнее</a>
+                    <h2 class="h5 card-title">{{ tour.title }}</h2>
+                    <p class="card-text">{{ tour.description }}</p>
+                    <p class="card-text"><b>{{ tour.date }}, {{ tour.nights }} ночей, {{ tour.price }} P</b></p>
+                    <a href="/tour/{{ id }}" class="btn btn-sm btn-primary">Подробнее</a>
                 </div>
             </div>
         </div>
